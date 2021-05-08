@@ -1,4 +1,5 @@
 
+#include <algorithm>
 #include <stdlib.h>  
 using namespace std;
 
@@ -188,6 +189,8 @@ void Graph<T>::findChromatic(){
 
 
     // illistrates how to get all permutations of a given number list ... use for generated 
+    // TODO: ask why hslinux does not like this ... works on my machine
+
     vector<T> v;      
     for(int i=0;i<vertices.size();i++){
         v.push_back(i);
@@ -195,7 +198,7 @@ void Graph<T>::findChromatic(){
 
     do{
         cout<<v[0]<<" "<<v[1]<<" "<<v[2]<<" "<<endl;
-    }while(next_permutation(v.begin(),v.end() ));
+    }while(next_permutation(v.begin(),v.end()));
     
 
 
