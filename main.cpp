@@ -49,43 +49,45 @@ int main(){
 
 
 
-    // Graph  <string> A;
-    // A.addVertex("MD");
-    // A.addVertex("DE");
-    // A.addVertex("PA");
-    // A.addVertex("NJ");
-    // A.addVertex("WV");
-    // A.addVertex("OH");
-    // A.addVertex("VA");
+    Graph  <string> A;
+    A.addVertex("MD");
+    A.addVertex("DE");
+    A.addVertex("PA");
+    A.addVertex("NJ");
+    A.addVertex("WV");
+    A.addVertex("OH");
+    A.addVertex("VA");
 
-    // A.addEdge("MD", "DE");
-    // A.addEdge("MD", "WV");
-    // A.addEdge("MD", "PA");
-    // A.addEdge("DE", "NJ");
-    // A.addEdge("PA", "NJ");
-    // A.addEdge("PA", "OH");
-    // A.addEdge("PA", "WV");
-    // A.addEdge("VA", "WV");
-
-
-    // A.print();
-    // A.colorGraph();
+    A.addEdge("MD", "DE");
+    A.addEdge("MD", "WV");
+    A.addEdge("MD", "PA");
+    A.addEdge("DE", "NJ");
+    A.addEdge("PA", "NJ");
+    A.addEdge("PA", "OH");
+    A.addEdge("PA", "WV");
+    A.addEdge("VA", "WV");
 
 
-    // example from chromatic number algorithm
-    Graph <int > B;
-    B.addVertex(1);
-    B.addVertex(2);
-    B.addVertex(3);
-    B.addVertex(4);
+    A.print();
+    A.colorGraph();
+    A.findChromatic();
 
-    B.addEdge(1,2);
-    B.addEdge(1,4);
-    B.addEdge(2,4);
-    B.addEdge(4,3);
 
-    B.print();
-    B.findChromatic();
+
+    // // example from chromatic number algorithm
+    // Graph <int > B;
+    // B.addVertex(1);
+    // B.addVertex(2);
+    // B.addVertex(3);
+    // B.addVertex(4);
+
+    // B.addEdge(1,2);
+    // B.addEdge(1,4);
+    // B.addEdge(2,4);
+    // B.addEdge(4,3);
+
+    // B.print();
+    // B.findChromatic();
 
 
 

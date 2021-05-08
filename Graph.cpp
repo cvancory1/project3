@@ -1,6 +1,4 @@
 
-#include <algorithm>
-#include <stdlib.h>  
 using namespace std;
 
 #define RESET   "\033[0m"
@@ -189,7 +187,6 @@ void Graph<T>::findChromatic(){
 
 
     // illistrates how to get all permutations of a given number list ... use for generated 
-    // TODO: ask why hslinux does not like this ... works on my machine
 
     vector<T> v;      
     for(int i=0;i<vertices.size();i++){

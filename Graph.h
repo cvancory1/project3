@@ -10,6 +10,8 @@
 #include <unistd.h>
 #include <list>
 #include <string>
+#include <algorithm>
+#include <stdlib.h>  
 
 
 
