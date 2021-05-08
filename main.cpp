@@ -84,7 +84,7 @@ int main(){
     B.addEdge(2,4);
     B.addEdge(4,3);
 
-    // B.print();
+    B.print();
     B.findChromatic();
 
 
