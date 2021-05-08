@@ -188,14 +188,14 @@ void Graph<T>::findChromatic(){
 
 
     // illistrates how to get all permutations of a given number list ... use for generated 
-    vector<int> v;      
-    for(int i=0;i<vertices.size();i++){
-        v.push_back(i);
-    }
+    // vector<int> v;      
+    // for(int i=0;i<vertices.size();i++){
+    //     v.push_back(i);
+    // }
 
-    do{
-        cout<<v[0]<<" "<<v[1]<<" "<<v[2]<<" "<<endl;
-    }while(next_permutation(v.begin(),v.end()));
+    // do{
+    //     cout<<v[0]<<" "<<v[1]<<" "<<v[2]<<" "<<endl;
+    // }while(next_permutation(v.begin(),v.end()));
     
 
 
