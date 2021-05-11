@@ -555,7 +555,7 @@ int Graph<T>:: get_binary(vector<T> current){
 template <class T>
 void Graph<T>::prepMIS(Graph current ,  vector <vector<T>> & set_MIS){
  
-    current.print();
+    // current.print();
 
 
     // 2^n set of verticies and go through and make sure they are not connected by an edge 

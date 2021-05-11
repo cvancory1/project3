@@ -112,34 +112,8 @@ int main(){
     C.print();
     // C.greedyColor();
 
-    // C.color();
-
-    // C.areConnected(C, "A","B");
-    // C.areConnected(C, "A","C");
-    // C.areConnected(C, "C","D");
-    // C.areConnected(C, "B","D");
-    // C.areConnected(C, "A","D");
+    C.color();
 
     
-
-
-    // vector<int> S = {1,2,3,4};
-    // vector<int> I= {2,4};
-
-    // vector<int> v(20);     
-    // vector<int>::iterator it;
-
-
-    // it= set_symmetric_difference (S.begin(), S.end(), I.begin(), I.end(), v.begin());
-
-    // cout<<"here3:"<<endl;
-    // v.resize(it-v.begin());      
-
-    // cout << "The symmetric difference has " << (v.size()) << " elements:\n";
-    // for (it=v.begin(); it!=v.end(); ++it){
-    //     cout << ' ' << *it;
-
-    // }
-    // cout << '\n';
 
 }
