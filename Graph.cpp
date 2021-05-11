@@ -225,7 +225,7 @@ Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
     //     // if vertex is found and iterate thru neighbors... add edges 
 
         if(graphIt != newGraph.vertices.end()){
-             graphIt++;
+            //  graphIt++;
 
         
             if (it->first == graphIt->first) {
