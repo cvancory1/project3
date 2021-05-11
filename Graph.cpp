@@ -638,6 +638,7 @@ void Graph<T>::color(){
         }
 
     }
+    cout<<endl;
     subGraphs[arrSize-2].print();
     cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
 
