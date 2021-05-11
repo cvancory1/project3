@@ -131,6 +131,10 @@ void Graph<T>::addEdge(T vertex, T vertex2 ){
 // // prints the adjacency list of each vertex, to show the structure
 template <class T>
 void Graph<T>::print(){
+
+    if(vertices.size() ==0){
+        cout<<"EMPTY GRAPH"<<endl;
+    }
     for( auto it = vertices.begin(); it != vertices.end(); it++){
         cout<<"V= "<<it->first;
         cout<<" {";
@@ -267,9 +271,9 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     // cout<<"n="<<n<<endl;
     // cout<<"totalBits"<<totalBits<<endl;
     int bitNum = 1;
-    int arrIndex =0;
+    int arrIndex = 0;
+    int size =n;
 
-    arr[0] = Graph();
 
     queue<string> qu;
     qu.push("1");
@@ -301,7 +305,9 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
         }
         
         makeSubgraph(temp);
-        arr[arrIndex ++] = temp;
+        arr[arrIndex] = temp;
+        cout<<endl;
+        arrIndex++;
 
         string s2 = s1;
         qu.push(s1 + "0");
@@ -310,13 +316,17 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     }
 
 
+    arr[size-1] = Graph();
 
-//         cout <<"final"<<endl;
 
-//     for(int i =0 ;i<pow(2, vertices .size());  i++){
-//         arr[i].print();
-//         cout<<endl;
-//     }
+        cout <<"final"<<endl;
+
+    for(int i =0 ;i<pow(2, vertices .size());  i++){
+        arr[i].print();
+        cout<<endl;
+    }
+
+
 }
 
 
@@ -556,7 +566,7 @@ int Graph<T>:: get_binary(vector<T> current){
 
     }
 
-    // cout<<"binary number is "<<binaryNum<<endl;
+    cout<<"Str = "<< bin << " binary number is "<<binaryNum<<endl;
     return binaryNum;
 
 }
@@ -610,44 +620,52 @@ void Graph<T>::color(){
     genSubgraphs(arrSize, subGraphs);
 
     int X [arrSize];
-    for(int i =0 ; i< arrSize -1 ; i++){
+    for(int i =0 ; i< arrSize ; i++){
         X[i] = arrSize;
     }
+
+    X[0]=0;
 
 
     for(int S =0 ; S <= arrSize -1 ; S++){
         // call prepMIS on every graph which generates all information for independet sets
         vector <vector<T> > MIS;
-        cout<<"printing subgraph"<<endl;
+        // cout<<"printing subgraph"<<endl;
 
-        subGraphs[S].print();
-        cout<<endl;
+        // subGraphs[S].print();
+        // cout<<endl;
         prepMIS(subGraphs[ S ] , MIS); // populate MIS with maximal independent sets of G[S]
 
         // for every maximum independent set found from this subgraph
         for(auto vectorIT : MIS){
-            for(T vertex :vectorIT ){ // j is type T so we can print 
+            // for(T vertex :vectorIT ){ // j is type T so we can print 
 
                 vector<T> S_I = get_verticesSet(subGraphs[S]); 
                 S_I = symDiff(S_I, vectorIT);
                 // printVector(S_I);
                 // get_binary(S_I);
+                cout<<"PRINTING VECTOR FOR the binary"<<endl;
+                printVector(S_I);
 
                 X[S] = min( X[S] , X[ get_binary(S_I)] +1 );
-                cout<<X[S]<<endl;
+                cout<<"index= " <<S <<" chromatic number assigned "<<X[S]<<endl;
+                cout<<endl;
+
                  // psuedocode
                 // X[S] = min(X[S], X[S \ I] + 1
 
-            }
+            // }
         }
 
     }
     cout<<endl;
     subGraphs[arrSize-1].print();
+    // cout<<"The chromatic number of the graph is "<< X[arrSize]<<endl;
     cout<<"The chromatic number of the graph is "<< X[arrSize-1]<<endl;
     cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
     cout<<"The chromatic number of the graph is "<< X[arrSize-3]<<endl;
     cout<<arrSize<<endl;
+
 
 }
 
