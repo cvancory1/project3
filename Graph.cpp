@@ -277,11 +277,12 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
 
     queue<string> qu;
     qu.push("1");
-    while(n != 0){
+    while(n != 0 && arrIndex != n){
 
-        cout<<"STRING"<<qu <<endl;
 
         string s1 = qu.front();
+        cout<<"STRING"<<s1 <<endl;
+
         qu.pop();
 
         if( ceil(log2(qu.size()+1)) == floor(log2(qu.size()+1)) ){
@@ -322,6 +323,12 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
 // okay i just did that so i am going to test on the server
 
  // oh my god it exploaded it has a stack overflow i think
+ // excellent.
+ // can you see me moving the console?
+ // no nothig is happening. You can't see my highlight? no i dont see anything.
+ // can i make it so you have access to more? 
+
+
     cout <<"final"<<endl;
 
     for(int i =0 ;i<pow(2, vertices .size());  i++){
