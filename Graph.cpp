@@ -271,9 +271,10 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     // cout<<"n="<<n<<endl;
     // cout<<"totalBits"<<totalBits<<endl;
     int bitNum = 1;
-    int arrIndex = 0;
+    int arrIndex = 1 ;
     int size =n;
 
+    arr[0] = Graph();
 
     queue<string> qu;
     qu.push("1");
@@ -303,6 +304,7 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
             }
 
         }
+        // awwww yeah
         
         makeSubgraph(temp);
         arr[arrIndex] = temp;
@@ -315,11 +317,14 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
         n--;
     }
 
+    // where? so i think it is from how i am generating the binary numbers Since i start with 0001 and not 0000. 
+    // because when i print my entire list of graphs the last index is just the single A and it shouls be the empty set in realiity 
+    // so you should probably (definitely) start with 0000 being the empty set if you're not.
+    // ok!
 
-    arr[size-1] = Graph();
 
 
-        cout <<"final"<<endl;
+    cout <<"final"<<endl;
 
     for(int i =0 ;i<pow(2, vertices .size());  i++){
         arr[i].print();
@@ -499,12 +504,17 @@ void Graph<T>:: genSets(int n , vector<vector<T>> & sets){
         auto it = vertices.begin(); 
         // cout <<"\nhere"<< bitStr<<endl;
         for(int i =0; i < vertices.size()  ;i++){
+            if(it != vertices.end()){
 
-            if(bitStr[i] =='1' ){
-                temp.push_back(it->first);
+                if(bitStr[i] =='1' ){
+                    temp.push_back(it->first);
+                }
             }
+
             if(it != vertices.end()){
                 it++;
+
+
             }
 
         }
@@ -517,6 +527,8 @@ void Graph<T>:: genSets(int n , vector<vector<T>> & sets){
         qu.push(s1 + "1");
         n--;
     }
+
+
 
 }
 
@@ -558,7 +570,7 @@ int Graph<T>:: get_binary(vector<T> current){
     index--;
     int binaryNum =0;
     // cout<<"binary string"<<bin<<endl;
-    for(int i = 0 ; i<vertices.size()  ;i++){
+    for(int i = 0 ; i<vertices.size() ;i++){
         if(bin[i] == '1'){
             binaryNum += pow(2, index );
         }
