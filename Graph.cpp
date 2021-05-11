@@ -259,45 +259,45 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     int bitNum = 1;
     int arrIndex =0;
 
-    arr[0] = Graph();
+    // arr[0] = Graph();
 
-    queue<string> qu;
-    qu.push("1");
-    while(n != 0){
-        string s1 = qu.front();
-        qu.pop();
+    // queue<string> qu;
+    // qu.push("1");
+    // while(n != 0){
+    //     string s1 = qu.front();
+    //     qu.pop();
 
-        if( ceil(log2(qu.size()+1)) == floor(log2(qu.size()+1)) ){
-            bitNum ++;
-        }
+    //     if( ceil(log2(qu.size()+1)) == floor(log2(qu.size()+1)) ){
+    //         bitNum ++;
+    //     }
      
 
-        Graph <T> temp;   
-        string bitStr = s1;
-        while(bitStr.length() < totalBits){
-            bitStr = "0" + bitStr;
-        }
+    //     Graph <T> temp;   
+    //     string bitStr = s1;
+    //     while(bitStr.length() < totalBits){
+    //         bitStr = "0" + bitStr;
+    //     }
 
-        auto it = vertices.begin(); 
-        for(int i =0; i < vertices.size()  ;i++){
+    //     auto it = vertices.begin(); 
+    //     for(int i =0; i < vertices.size()  ;i++){
 
-            if(bitStr[i] =='1' ){
-                temp.addVertex(it->first);
-            }
-            if(it != vertices.end()){
-                it++;
-            }
+    //         if(bitStr[i] =='1' ){
+    //             temp.addVertex(it->first);
+    //         }
+    //         if(it != vertices.end()){
+    //             it++;
+    //         }
 
-        }
+    //     }
         
-        makeSubgraph(temp);
-        arr[arrIndex ++] = temp;
+    //     makeSubgraph(temp);
+    //     arr[arrIndex ++] = temp;
 
-        string s2 = s1;
-        qu.push(s1 + "0");
-        qu.push(s1 + "1");
-        n--;
-    }
+    //     string s2 = s1;
+    //     qu.push(s1 + "0");
+    //     qu.push(s1 + "1");
+    //     n--;
+    // }
 
 
 
@@ -628,8 +628,8 @@ void Graph<T>::color(){
     //     }
 
     // }
-    // // cout<<subGraphs[arrSize-2]<<endl;
-    // // subGraphs[arrSize-2].print();
+    // cout<<subGraphs[arrSize-2]<<endl;
+    // subGraphs[arrSize-2].print();
     // cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
 
 
