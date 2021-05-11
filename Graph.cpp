@@ -633,8 +633,8 @@ void Graph<T>::color(){
                 // printVector(S_I);
                 // get_binary(S_I);
 
-                X[S] = min( X[S] , (X[ get_binary(S_I)] ) +1 );
-                // cout<<X[S]<<endl;
+                X[S] = min( X[S] , X[ get_binary(S_I)]  +1 );
+                cout<<X[S]<<endl;
                  // psuedocode
                 // X[S] = min(X[S], X[S \ I] + 1
 
