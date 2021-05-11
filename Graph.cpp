@@ -293,10 +293,10 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     //     makeSubgraph(temp);
     //     arr[arrIndex ++] = temp;
 
-    //     string s2 = s1;
-    //     qu.push(s1 + "0");
-    //     qu.push(s1 + "1");
-    //     n--;
+        string s2 = s1;
+        qu.push(s1 + "0");
+        qu.push(s1 + "1");
+        n--;
     }
 
 
