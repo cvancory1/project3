@@ -622,7 +622,7 @@ void Graph<T>::color(){
 
         subGraphs[S].print();
         cout<<endl;
-        prepMIS(subGraphs[ arrSize -2 ] , MIS);
+        prepMIS(subGraphs[ arrSize -1 ] , MIS);
 
         // for every maximum independent set found from this subgraph
         for(auto vectorIT : MIS){
