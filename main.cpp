@@ -109,7 +109,7 @@ int main(){
     C.addEdge("C","D");
     // C.addEdge("D","C");
     
-    C.print();
+    // C.print();
     // C.greedyColor();
 
     C.color();

@@ -597,12 +597,12 @@ void Graph<T>::color(){
 
     int arrSize = pow(2, vertices.size());
     Graph<T> subGraphs [arrSize]; 
-    genSubgraphs(arrSize, subGraphs);
+    // genSubgraphs(arrSize, subGraphs);
 
-    int X [arrSize];
-    for(int i =0 ; i< arrSize -1 ; i++){
-        X[i] = arrSize;
-    }
+    // int X [arrSize];
+    // for(int i =0 ; i< arrSize -1 ; i++){
+    //     X[i] = arrSize;
+    // }
 
 
     // for(int S =0 ; S < arrSize -1 ; S++){
