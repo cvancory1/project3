@@ -222,23 +222,23 @@ Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
     auto graphIt = newGraph.vertices.begin();
 
     for (auto it = vertices.begin(); it != vertices.end(); it++) {
-        // if vertex is found and iterate thru neighbors... add edges 
-        if (it->first == graphIt->first) {
-            T node1 = it->first;
+    //     // if vertex is found and iterate thru neighbors... add edges 
+    //     if (it->first == graphIt->first) {
+    //         T node1 = it->first;
 
-             for( auto i : vertices [it->first]){
-                T node2 = i;
+    //          for( auto i : vertices [it->first]){
+    //             T node2 = i;
 
-                if( newGraph.vertices.count(i) > 0){ // both nodes exist in the newGraph and the edges between them need to be added 
-                    newGraph.addEdge(node1 , node2);
-                }
-            }
+    //             if( newGraph.vertices.count(i) > 0){ // both nodes exist in the newGraph and the edges between them need to be added 
+    //                 newGraph.addEdge(node1 , node2);
+    //             }
+    //         }
 
-            if(graphIt != newGraph.vertices.end()){
-                graphIt++;
+    //         if(graphIt != newGraph.vertices.end()){
+    //             graphIt++;
 
-            }
-        }
+    //         }
+    //     }
     }
 
 
@@ -290,8 +290,8 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
 
         }
         
-    //     makeSubgraph(temp);
-    //     arr[arrIndex ++] = temp;
+        makeSubgraph(temp);
+        arr[arrIndex ++] = temp;
 
         string s2 = s1;
         qu.push(s1 + "0");
