@@ -263,32 +263,32 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
 
     queue<string> qu;
     qu.push("1");
-    // while(n != 0){
-    //     string s1 = qu.front();
-    //     qu.pop();
+    while(n != 0){
+        string s1 = qu.front();
+        qu.pop();
 
-    //     if( ceil(log2(qu.size()+1)) == floor(log2(qu.size()+1)) ){
-    //         bitNum ++;
-    //     }
+        if( ceil(log2(qu.size()+1)) == floor(log2(qu.size()+1)) ){
+            bitNum ++;
+        }
      
 
-    //     Graph <T> temp;   
-    //     string bitStr = s1;
-    //     while(bitStr.length() < totalBits){
-    //         bitStr = "0" + bitStr;
-    //     }
+        Graph <T> temp;   
+        string bitStr = s1;
+        while(bitStr.length() < totalBits){
+            bitStr = "0" + bitStr;
+        }
 
-    //     auto it = vertices.begin(); 
-    //     for(int i =0; i < vertices.size()  ;i++){
+        auto it = vertices.begin(); 
+        for(int i =0; i < vertices.size()  ;i++){
 
-    //         if(bitStr[i] =='1' ){
-    //             temp.addVertex(it->first);
-    //         }
-    //         if(it != vertices.end()){
-    //             it++;
-    //         }
+            if(bitStr[i] =='1' ){
+                temp.addVertex(it->first);
+            }
+            if(it != vertices.end()){
+                it++;
+            }
 
-    //     }
+        }
         
     //     makeSubgraph(temp);
     //     arr[arrIndex ++] = temp;
@@ -297,7 +297,7 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     //     qu.push(s1 + "0");
     //     qu.push(s1 + "1");
     //     n--;
-    // }
+    }
 
 
 
