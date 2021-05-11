@@ -320,8 +320,7 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     // where? so i think it is from how i am generating the binary numbers Since i start with 0001 and not 0000. 
     // because when i print my entire list of graphs the last index is just the single A and it shouls be the empty set in realiity 
     // so you should probably (definitely) start with 0000 being the empty set if you're not.
-    // ok!
-
+// okay i just did that so i am going to test on the server
 
 
     cout <<"final"<<endl;
