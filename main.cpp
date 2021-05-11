@@ -24,7 +24,7 @@ GOALS:
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/stat.h> // defines s_iread and s_iwrite
-#include <string> // defines s_iread and s_iwrite
+#include <string> 
 
 #include "Graph.h"
 
@@ -32,7 +32,10 @@ using namespace std;
 
 
 
+
+
 int main(){
+
     // Graph  <int> G;
     // G.addVertex(1);
     // G.addVertex(2);
@@ -45,53 +48,98 @@ int main(){
 
     // // G.print();
 
-    // G.colorGraph();
+    // G.color();
+
+    
+
+
+    // Graph  <string> A;
+    // A.addVertex("MD");
+    // A.addVertex("MD");
+    // A.addVertex("DE");
+    // A.addVertex("PA");
+    // A.addVertex("NJ");
+    // A.addVertex("WV");
+    // A.addVertex("OH");
+    // A.addVertex("VA");
+
+    // A.addEdge("MD", "DE");
+    // A.addEdge("MD", "WV");
+    // A.addEdge("MD", "PA");
+    // A.addEdge("DE", "NJ");
+    // A.addEdge("PA", "NJ");
+    // A.addEdge("PA", "OH");
+    // A.addEdge("PA", "WV");
+    // A.addEdge("VA", "WV");
+
+
+    // A.print();
+    // A.greedyColor();
+    // A.findChromatic();
 
 
 
-    Graph  <string> A;
-    A.addVertex("MD");
-    A.addVertex("DE");
-    A.addVertex("PA");
-    A.addVertex("NJ");
-    A.addVertex("WV");
-    A.addVertex("OH");
-    A.addVertex("VA");
-
-    A.addEdge("MD", "DE");
-    A.addEdge("MD", "WV");
-    A.addEdge("MD", "PA");
-    A.addEdge("DE", "NJ");
-    A.addEdge("PA", "NJ");
-    A.addEdge("PA", "OH");
-    A.addEdge("PA", "WV");
-    A.addEdge("VA", "WV");
-
-
-    A.print();
-    A.colorGraph();
-    A.findChromatic();
-
-
-
-    // // example from chromatic number algorithm
+    // example from chromatic number algorithm
     // Graph <int > B;
     // B.addVertex(1);
     // B.addVertex(2);
     // B.addVertex(3);
     // B.addVertex(4);
 
-    // B.addEdge(1,2);
-    // B.addEdge(1,4);
-    // B.addEdge(2,4);
-    // B.addEdge(4,3);
+    // // B.addEdge(1,2);
+    // // B.addEdge(1,4);
+    // // B.addEdge(2,4);
+    // // B.addEdge(4,3);
 
     // B.print();
-    // B.findChromatic();
+    // // B.greedyColor();
+
+    // B.color();
 
 
+// example from chromatic number algorithm
+    Graph <string > C;
+    C.addVertex("A");
+    C.addVertex("B");
+    C.addVertex("C");
+    C.addVertex("D");
+
+    C.addEdge("A","B");
+    C.addEdge("A","C");
+    C.addEdge("C","D");
+    // C.addEdge("D","C");
+    
+    // C.print();
+    // C.greedyColor();
+
+    C.color();
+
+    // C.areConnected(C, "A","B");
+    // C.areConnected(C, "A","C");
+    // C.areConnected(C, "C","D");
+    // C.areConnected(C, "B","D");
+    // C.areConnected(C, "A","D");
+
+    
 
 
+    // vector<int> S = {1,2,3,4};
+    // vector<int> I= {2,4};
 
+    // vector<int> v(20);     
+    // vector<int>::iterator it;
+
+
+    // it= set_symmetric_difference (S.begin(), S.end(), I.begin(), I.end(), v.begin());
+
+    // cout<<"here3:"<<endl;
+    // v.resize(it-v.begin());      
+
+    // cout << "The symmetric difference has " << (v.size()) << " elements:\n";
+    // for (it=v.begin(); it!=v.end(); ++it){
+    //     cout << ' ' << *it;
+
+    // }
+    // cout << '\n';
 
 }
