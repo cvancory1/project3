@@ -234,10 +234,10 @@ Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
                 }
             }
 
-            if(graphIt != newGraph.vertices.end()){
-                graphIt++;
+            // if(graphIt != newGraph.vertices.end()){
+            //     graphIt++;
 
-            }
+            // }
         }
     }
 
