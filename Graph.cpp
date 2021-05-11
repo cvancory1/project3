@@ -618,6 +618,10 @@ void Graph<T>::color(){
     for(int S =0 ; S < arrSize -1 ; S++){
         // call prepMIS on every graph which generates all information for independet sets
         vector <vector<T> > MIS;
+        cout<<"printnig subgraph"<<endl;
+
+        subGraphs[S].print();
+        cout<<endl;
         prepMIS(subGraphs[ arrSize -2 ] , MIS);
 
         // for every maximum independent set found from this subgraph
