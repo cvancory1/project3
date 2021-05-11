@@ -243,8 +243,7 @@ Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
             }
         }
         if(graphIt != newGraph.vertices.end()){
-            //  graphIt++;
-
+             graphIt++;
 
         }
 
@@ -253,7 +252,7 @@ Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
     }
 
 
-    // newGraph.print();
+    newGraph.print();
     return newGraph;
 
 }
@@ -610,38 +609,37 @@ void Graph<T>::color(){
     Graph<T> subGraphs [arrSize]; 
     genSubgraphs(arrSize, subGraphs);
 
-    // int X [arrSize];
-    // for(int i =0 ; i< arrSize -1 ; i++){
-    //     X[i] = arrSize;
-    // }
+    int X [arrSize];
+    for(int i =0 ; i< arrSize -1 ; i++){
+        X[i] = arrSize;
+    }
 
 
-    // for(int S =0 ; S < arrSize -1 ; S++){
-    //     // call prepMIS on every graph which generates all information for independet sets
-    //     vector <vector<T> > MIS;
-    //     prepMIS(subGraphs[ arrSize -2 ] , MIS);
+    for(int S =0 ; S < arrSize -1 ; S++){
+        // call prepMIS on every graph which generates all information for independet sets
+        vector <vector<T> > MIS;
+        prepMIS(subGraphs[ arrSize -2 ] , MIS);
 
-    //     // for every maximum independent set found from this subgraph
-    //     for(auto vectorIT : MIS){
-    //         for(T vertex :vectorIT ){ // j is type T so we can print 
+        // for every maximum independent set found from this subgraph
+        for(auto vectorIT : MIS){
+            for(T vertex :vectorIT ){ // j is type T so we can print 
 
-    //             vector<T> S_I = get_verticesSet(subGraphs[S]); 
-    //             S_I = symDiff(S_I, vectorIT);
-    //             // printVector(S_I);
-    //             // get_binary(S_I);
+                vector<T> S_I = get_verticesSet(subGraphs[S]); 
+                S_I = symDiff(S_I, vectorIT);
+                // printVector(S_I);
+                // get_binary(S_I);
 
-    //             X[S] = min( X[S] , X[ get_binary(S_I)]+1 );
-    //             // cout<<X[S]<<endl;
-    //              // psuedocode
-    //             // X[S] = min(X[S], X[S \ I] + 1
+                X[S] = min( X[S] , X[ get_binary(S_I)]+1 );
+                // cout<<X[S]<<endl;
+                 // psuedocode
+                // X[S] = min(X[S], X[S \ I] + 1
 
-    //         }
-    //     }
+            }
+        }
 
-    // }
-    // cout<<subGraphs[arrSize-2]<<endl;
-    // subGraphs[arrSize-2].print();
-    // cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
+    }
+    subGraphs[arrSize-2].print();
+    cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
 
 
 }
