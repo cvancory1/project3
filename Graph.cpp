@@ -259,7 +259,7 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
     int bitNum = 1;
     int arrIndex =0;
 
-    // arr[0] = Graph();
+    arr[0] = Graph();
 
     // queue<string> qu;
     // qu.push("1");
