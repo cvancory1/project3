@@ -615,14 +615,14 @@ void Graph<T>::color(){
     }
 
 
-    for(int S =0 ; S < arrSize -1 ; S++){
+    for(int S =0 ; S <= arrSize -1 ; S++){
         // call prepMIS on every graph which generates all information for independet sets
         vector <vector<T> > MIS;
-        cout<<"printnig subgraph"<<endl;
+        cout<<"printing subgraph"<<endl;
 
         subGraphs[S].print();
         cout<<endl;
-        prepMIS(subGraphs[ arrSize -1 ] , MIS);
+        prepMIS(subGraphs[ S ] , MIS); // populate MIS with maximal independent sets of G[S]
 
         // for every maximum independent set found from this subgraph
         for(auto vectorIT : MIS){
@@ -633,7 +633,7 @@ void Graph<T>::color(){
                 // printVector(S_I);
                 // get_binary(S_I);
 
-                X[S] = min( X[S] , X[ get_binary(S_I)]  +1 );
+                X[S] = min( X[S] , X[ get_binary(S_I)] +1 );
                 cout<<X[S]<<endl;
                  // psuedocode
                 // X[S] = min(X[S], X[S \ I] + 1
@@ -644,8 +644,8 @@ void Graph<T>::color(){
     }
     cout<<endl;
     subGraphs[arrSize-1].print();
-    // cout<<"The chromatic number of the graph is "<< X[arrSize-1]<<endl;
-    // cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
+    cout<<"The chromatic number of the graph is "<< X[arrSize-1]<<endl;
+    cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
     cout<<"The chromatic number of the graph is "<< X[arrSize-3]<<endl;
     cout<<arrSize<<endl;
 
