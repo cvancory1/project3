@@ -225,21 +225,22 @@ Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
     //     // if vertex is found and iterate thru neighbors... add edges 
 
         if(graphIt != newGraph.vertices.end()){
-                graphIt++;
+             graphIt++;
 
-        }
-        if (it->first == graphIt->first) {
-            T node1 = it->first;
+        
+            if (it->first == graphIt->first) {
+                T node1 = it->first;
 
-             for( auto i : vertices [it->first]){
-                T node2 = i;
+                for( auto i : vertices [it->first]){
+                    T node2 = i;
 
-                if( newGraph.vertices.count(i) > 0){ // both nodes exist in the newGraph and the edges between them need to be added 
-                    newGraph.addEdge(node1 , node2);
+                    if( newGraph.vertices.count(i) > 0){ // both nodes exist in the newGraph and the edges between them need to be added 
+                        newGraph.addEdge(node1 , node2);
+                    }
                 }
-            }
 
-           
+            
+            }
         }
     }
 
