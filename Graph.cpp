@@ -261,8 +261,8 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
 
     arr[0] = Graph();
 
-    // queue<string> qu;
-    // qu.push("1");
+    queue<string> qu;
+    qu.push("1");
     // while(n != 0){
     //     string s1 = qu.front();
     //     qu.pop();
