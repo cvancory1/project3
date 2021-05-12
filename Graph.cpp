@@ -312,29 +312,25 @@ map<string, Graph<T>> Graph<T>:: genSubgraphs(){
     int totalBits =log2(n);
     cout<<"n="<<n<<endl;
     cout<<"totalBits"<<totalBits<<endl;
-    int bitNum = 1;
+    // int bitNum = 1;
     int arrIndex = 0 ;
 
     // the lhs is a binary string, e.g. "001001011" that maps to 
     // the corresponding subgraph
     map <string,Graph<T>> subGraphs;
 
-    
-
-
     queue<string> qu;
     qu.push("1");
     while(n != 0 ){
-
 
         string s1 = qu.front();
         // cout<<"STRING"<<s1 <<endl;
 
         qu.pop();
 
-        if( ceil(log2(qu.size()+1)) == floor(log2(qu.size()+1)) ){
-            bitNum ++;
-        }
+        // if( ceil(log2(qu.size()+1)) == floor(log2(qu.size()+1)) ){
+        //     bitNum ++;
+        // }
      
         
         Graph <T> temp;   
@@ -356,18 +352,19 @@ map<string, Graph<T>> Graph<T>:: genSubgraphs(){
 
         }
         
-        
         //arr[arrIndex] = temp;
         //rtn.push_back(temp);
 
-        // TODO: this is broken right now use for mapp 
-        subGraphs.emplace(bitStr, makeSubgraph(temp));
+        if(bitStr.size() == totalBits){
+            subGraphs.emplace(bitStr, makeSubgraph(temp));
+
+        }
 
         // subGraphs[bitStr] = temp;
         
 
         cout<<endl;
-        arrIndex++;
+        // arrIndex++;
 
         string s2 = s1;
         qu.push(s1 + "0");
@@ -578,6 +575,7 @@ void Graph<T>:: genSets(int n , vector<vector<T>> & sets){
 
         }
         
+        
         sets.push_back(temp);
 
 
@@ -603,9 +601,10 @@ vector<T> Graph<T>:: get_verticesSet(Graph current){
 
 }
 
+
 // given a vector with verticies, will determine its binary representation 
 template <class T>
-int Graph<T>:: get_binary(vector<T> current){
+string Graph<T>:: get_binary(vector<T> current){
     string bin;
 
     for(int i =0;i< vertices.size() ;i++){ // need all the verticies in the calling graph for chrom number
@@ -637,9 +636,10 @@ int Graph<T>:: get_binary(vector<T> current){
 
     }
 
-    cout<<"Str = "<< bin << " binary number is "<<binaryNum<<endl;
-    return binaryNum;
+    // cout<<"Str = "<< bin << " binary number is "<<binaryNum<<endl;
+    // return to_string(binaryNum);
 
+    return bin;
 }
 
 // takes info from a given graph (will be a subgraph) and sends the info to SMALL MIS in the correct format
@@ -651,7 +651,8 @@ void Graph<T>::prepMIS(Graph current ,  vector <vector<T>> & set_MIS){
 
     // 2^n set of verticies and go through and make sure they are not connected by an edge 
     int graphSize = pow(2,current.vertices.size());
-    genSets( graphSize, set_MIS);
+    current.genSets( graphSize, set_MIS);
+    
 
 
     // cout<<"printing the gen sets"<<endl;
@@ -680,6 +681,11 @@ void Graph<T>::prepMIS(Graph current ,  vector <vector<T>> & set_MIS){
 
 }
 
+template <class T>
+string Graph<T>::binValue(int ){
+
+}
+
 
 template <class T>
 void Graph<T>::color(){
@@ -689,54 +695,97 @@ void Graph<T>::color(){
     int arrSize = pow(2, vertices.size());
     // Graph<T> subGraphs [arrSize]; 
     // genSubgraphs(arrSize, subGraphs);
-   map<string, Graph<T>> subGraphs = genSubgraphs();
+    map<string, Graph<T>> subGraphs = genSubgraphs();
+    map<string, int > X ;
 
-    // int X [arrSize];
-    // for(int i =0 ; i< arrSize ; i++){
-    //     X[i] = arrSize;
-    // }
+    X.emplace("0000",0);
+    for(auto S =subGraphs.begin() ; S !=subGraphs.end() ; S++){
 
-    // X[0]=0;
+        if(S->second.vertices.size() ==1 ){
+            X.emplace(S->first, 1 );
+
+        }else{
+            X.emplace(S->first, arrSize );
+
+        }
+
+
+    }
+
+    cout<<"printing X"<<endl;
+    
+    for(auto S =X.begin() ; S !=X.end() ; S++){
+        cout<<S->first <<"= "<<S->second<<endl;
+    }
+
+        cout<<"size X"<< X.size()<<endl;
+        cout<<"size X"<< subGraphs.size()<<endl;
 
 
     // for(int S =0 ; S <= arrSize -1 ; S++){
+    for(auto S =subGraphs.begin() ; S !=subGraphs.end() ; S++){
     //     // call prepMIS on every graph which generates all information for independet sets
-    //     vector <vector<T> > MIS;
-    //     // cout<<"printing subgraph"<<endl;
+       
+        
+        vector <vector<T> > MIS;
+        cout<<"printing subgraph"<<endl;
+        S->second.print();
+        // cout<<endl;
 
-    //     // subGraphs[S].print();
-    //     // cout<<endl;
-    //     prepMIS(subGraphs[ S ] , MIS); // populate MIS with maximal independent sets of G[S]
+        prepMIS(S->second , MIS); // populate MIS with maximal independent sets of G[S]
 
-    //     // for every maximum independent set found from this subgraph
-    //     for(auto vectorIT : MIS){
-    //         // for(T vertex :vectorIT ){ // j is type T so we can print 
+        cout<<"PRINTING"<<endl;
+        printVector_set(MIS);
+        cout<<endl;
+        // for every maximum independent set found from this subgraph
+        for(auto vectorIT : MIS){
 
-    //             vector<T> S_I = get_verticesSet(subGraphs[S]); 
-    //             S_I = symDiff(S_I, vectorIT);
-    //             // printVector(S_I);
-    //             // get_binary(S_I);
-    //             cout<<"PRINTING VECTOR FOR the binary"<<endl;
-    //             printVector(S_I);
+                // vector<T> S_I = get_verticesSet(subGraphs[S]); 
+                vector<T> S_I = get_verticesSet(S->second); 
+                cout<<"BEFORE SYM DIFF"<<endl;
 
-    //             X[S] = min( X[S] , X[ get_binary(S_I)] +1 );
-    //             cout<<"index= " <<S <<" chromatic number assigned "<<X[S]<<endl;
-    //             cout<<endl;
+                printVector(S_I);
 
-    //              // psuedocode
-    //             // X[S] = min(X[S], X[S \ I] + 1
+                S_I = symDiff(S_I, vectorIT);
+                // get_binary(S_I);
+                cout<<"PRINTING VECTOR FOR the binary"<<endl;
+                printVector(S_I);
+                printVector(vectorIT);
 
-    //         // }
-    //     }
+
+                cout<<X[S->first] <<" VS  "<<  X[ get_binary(S_I)] +1<<endl;
+
+                X[S->first] = min( X[S->first] , X[ get_binary(S_I)] +1 );
+
+                cout<<"PRINTING S values"<<endl;
+
+
+                cout<<"index= " <<S->first <<" chromatic number assigned "<<X[S->first]<<endl;
+                cout<<endl;
+       
+               
+
+                 // psuedocode
+                // X[S] = min(X[S], X[S \ I] + 1
+
+        }
+
+
+    }
+
+      
+    // for(auto S =X.begin() ; S !=X.end() ; S++){
+    //     cout<<S->first <<"= "<<S->second<<endl;
 
     // }
-    // cout<<endl;
-    // // subGraphs[arrSize-1].print();
-    // // // cout<<"The chromatic number of the graph is "<< X[arrSize]<<endl;
-    // // cout<<"The chromatic number of the graph is "<< X[arrSize-1]<<endl;
-    // // cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
-    // // cout<<"The chromatic number of the graph is "<< X[arrSize-3]<<endl;
-    // cout<<arrSize<<endl;
+
+    // // cout<<endl;
+    // // // subGraphs[arrSize-1].print();
+    // // // // cout<<"The chromatic number of the graph is "<< X[arrSize]<<endl;
+    // // // cout<<"The chromatic number of the graph is "<< X[arrSize-1]<<endl;
+    // // // cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
+    // // // cout<<"The chromatic number of the graph is "<< X[arrSize-3]<<endl;
+    // // cout<<arrSize<<endl;
 
 
 }

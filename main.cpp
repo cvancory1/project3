@@ -106,8 +106,8 @@ int main(){
 
     C.addEdge("A","B");
     C.addEdge("A","C");
-    C.addEdge("C","D");
-    // C.addEdge("D","C");
+    C.addEdge("A","D");
+    C.addEdge("B","C");
     
     // C.print();
     // C.greedyColor();

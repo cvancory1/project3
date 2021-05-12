@@ -51,7 +51,8 @@ class Graph{
         vector<T> get_verticesSet(Graph current);
 
 
-        int get_binary(vector<T> current); // takes the verticies and converts it to bin 
+        string get_binary(vector<T> current); // takes the verticies and converts it to bin 
+        string binValue(int);
 
 
 
