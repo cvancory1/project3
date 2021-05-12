@@ -42,7 +42,7 @@ class Graph{
         void addEdge(T , T);
         void greedyColor(); // greedy algorithm to color graph 
 
-        void genSubgraphs(int n, Graph []); // 
+        map<string, Graph<T>>  genSubgraphs(); // 
         Graph<T> makeSubgraph(Graph & );
 
         void genSets(int n, vector< vector<T> > & );

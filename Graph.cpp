@@ -221,42 +221,84 @@ void  Graph<T>::greedyColor(T vertex){
 // passing in a graph that needs the correct edges added but already has the verticies
 template <class T>
 Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
-    // it thru verticies, if the verticies math then add all of the neighbors 
-    
-    auto graphIt = newGraph.vertices.begin();
+    cout<<"ENTER makeSubgraph"<<endl;
 
-    for (auto it = vertices.begin(); it != vertices.end(); it++) {
-    //     // if vertex is found and iterate thru neighbors... add edges 
 
-        if(graphIt != newGraph.vertices.end()){
-            //  graphIt++;
+    // for every pair of verticies in new graph 
+        // double for loop i , j 
+        // see if the main graph has an edge between them
+            // see if j is in i's adjacency list 
+            // find(vertices[i].begin(),vertices[i].end(), j ) // start , end , target 
 
+                    // will return to the it to the obj or the it to the end of the array 
+                        // i.e test if find() == vertices[i].end()== end)
+
+        cout<<"size="<<  newGraph.vertices.size()<<endl;
         
-            if (it->first == graphIt->first) {
-                T node1 = it->first;
+        for(auto it = newGraph.vertices.begin() ; it != newGraph.vertices.end() ; it++){
+            T node1 = it->first;
+            cout<<"node1"<<node1<<endl;
 
-                for( auto i : vertices [it->first]){
-                    T node2 = i;
+            // for(auto neighbor : it->second){
+            for(auto it2 = newGraph.vertices.begin() ; it2 != newGraph.vertices.end() ; it2++){
 
-                    if( newGraph.vertices.count(i) > 0){ // both nodes exist in the newGraph and the edges between them need to be added 
-                        newGraph.addEdge(node1 , node2);
-                    }
+                T node2 = it2->first;
+                cout<<"node1"<<node1<<" node2 "<<node2<<endl;
+
+                auto isNode1 = find(vertices[node2].begin() , vertices[node2].end() , node1); // is node 1 in the neighborhood of node2 
+                // auto isNode2 = find(vertices.begin() , vertices.end() , node2);
+                if(isNode1 != vertices[node2].end() ){
+                    newGraph.addEdge(node1,node2);
                 }
 
-            
             }
+
+
+
         }
-        if(graphIt != newGraph.vertices.end()){
-             graphIt++;
-
-        }
 
 
 
-    }
 
 
-    newGraph.print();
+
+
+    // it thru verticies, if the verticies math then add all of the neighbors 
+    
+    // auto graphIt = newGraph.vertices.begin();
+    // for (auto it = vertices.begin(); it != vertices.end(); it++) {
+    // //     // if vertex is found and iterate thru neighbors... add edges 
+    //         cout<<"MATCH original node= "<<it ->first<<" new Node="<<graphIt->first<<endl;
+
+    //     if(graphIt != newGraph.vertices.end()){
+    //         //  graphIt++;
+    //         // cout<<"original node= "<<it ->first<<" new Node="<<graphIt->first<<endl;
+        
+    //         if (it->first == graphIt->first) {
+    //         // cout<<"MATCH original node= "<<it ->first<<" new Node="<<graphIt->first<<endl;
+
+    //             cout<<"MATCH"<<endl;
+    //             T node1 = it->first;
+
+    //             for( auto i : vertices [it->first]){
+    //                 T node2 = i;
+
+    //                 if( newGraph.vertices.count(i) > 0){ // both nodes exist in the newGraph and the edges between them need to be added 
+    //                     newGraph.addEdge(node1 , node2);
+    //                 }
+    //             }
+            
+    //         }
+    //     }
+    //     if(graphIt != newGraph.vertices.end()){
+    //         //  graphIt++;
+
+    //     }
+
+    // }
+
+
+    // newGraph.print();
     return newGraph;
 
 }
@@ -264,24 +306,29 @@ Graph<T> Graph<T>::makeSubgraph( Graph  & newGraph ){
 
 // pass in 2^n and the graph array to generate all SUBGRAPHS
 template <class T>
-void Graph<T>:: genSubgraphs(int n , Graph arr[]){
+map<string, Graph<T>> Graph<T>:: genSubgraphs(){
 
-
+    int n = pow(2, vertices.size() ); /* 2**vetices.size */
     int totalBits =log2(n);
-    // cout<<"n="<<n<<endl;
-    // cout<<"totalBits"<<totalBits<<endl;
+    cout<<"n="<<n<<endl;
+    cout<<"totalBits"<<totalBits<<endl;
     int bitNum = 1;
     int arrIndex = 0 ;
 
-    // arr[0] = Graph();
+    // the lhs is a binary string, e.g. "001001011" that maps to 
+    // the corresponding subgraph
+    map <string,Graph<T>> subGraphs;
+
+    
+
 
     queue<string> qu;
     qu.push("1");
-    while(n != 0 && arrIndex != n){
+    while(n != 0 ){
 
 
         string s1 = qu.front();
-        cout<<"STRING"<<s1 <<endl;
+        // cout<<"STRING"<<s1 <<endl;
 
         qu.pop();
 
@@ -289,12 +336,13 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
             bitNum ++;
         }
      
-
+        
         Graph <T> temp;   
         string bitStr = s1;
         while(bitStr.length() < totalBits){
             bitStr = "0" + bitStr;
         }
+
 
         auto it = vertices.begin(); 
         for(int i =0; i < vertices.size()  ;i++){
@@ -307,10 +355,17 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
             }
 
         }
-        // awwww yeah
         
-        makeSubgraph(temp);
-        arr[arrIndex] = temp;
+        
+        //arr[arrIndex] = temp;
+        //rtn.push_back(temp);
+
+        // TODO: this is broken right now use for mapp 
+        subGraphs.emplace(bitStr, makeSubgraph(temp));
+
+        // subGraphs[bitStr] = temp;
+        
+
         cout<<endl;
         arrIndex++;
 
@@ -320,22 +375,21 @@ void Graph<T>:: genSubgraphs(int n , Graph arr[]){
         n--;
     }
 
-// okay i just did that so i am going to test on the server
 
- // oh my god it exploaded it has a stack overflow i think
- // excellent.
- // can you see me moving the console?
- // no nothig is happening. You can't see my highlight? no i dont see anything.
- // can i make it so you have access to more? 
 
 
     cout <<"final"<<endl;
 
-    for(int i =0 ;i<pow(2, vertices .size());  i++){
-        arr[i].print();
+    int i =0;
+    for(auto it = subGraphs.begin() ;it != subGraphs.end() ;  it++){
+        cout<<i++<<endl;
+        cout<<"str" << it->first<<endl;
+        it->second.print();
+
         cout<<endl;
     }
 
+    return subGraphs;
 
 }
 
@@ -633,128 +687,60 @@ void Graph<T>::color(){
 
 
     int arrSize = pow(2, vertices.size());
-    Graph<T> subGraphs [arrSize]; 
-    genSubgraphs(arrSize, subGraphs);
+    // Graph<T> subGraphs [arrSize]; 
+    // genSubgraphs(arrSize, subGraphs);
+   map<string, Graph<T>> subGraphs = genSubgraphs();
 
-    int X [arrSize];
-    for(int i =0 ; i< arrSize ; i++){
-        X[i] = arrSize;
-    }
+    // int X [arrSize];
+    // for(int i =0 ; i< arrSize ; i++){
+    //     X[i] = arrSize;
+    // }
 
-    X[0]=0;
+    // X[0]=0;
 
 
-    for(int S =0 ; S <= arrSize -1 ; S++){
-        // call prepMIS on every graph which generates all information for independet sets
-        vector <vector<T> > MIS;
-        // cout<<"printing subgraph"<<endl;
+    // for(int S =0 ; S <= arrSize -1 ; S++){
+    //     // call prepMIS on every graph which generates all information for independet sets
+    //     vector <vector<T> > MIS;
+    //     // cout<<"printing subgraph"<<endl;
 
-        // subGraphs[S].print();
-        // cout<<endl;
-        prepMIS(subGraphs[ S ] , MIS); // populate MIS with maximal independent sets of G[S]
+    //     // subGraphs[S].print();
+    //     // cout<<endl;
+    //     prepMIS(subGraphs[ S ] , MIS); // populate MIS with maximal independent sets of G[S]
 
-        // for every maximum independent set found from this subgraph
-        for(auto vectorIT : MIS){
-            // for(T vertex :vectorIT ){ // j is type T so we can print 
+    //     // for every maximum independent set found from this subgraph
+    //     for(auto vectorIT : MIS){
+    //         // for(T vertex :vectorIT ){ // j is type T so we can print 
 
-                vector<T> S_I = get_verticesSet(subGraphs[S]); 
-                S_I = symDiff(S_I, vectorIT);
-                // printVector(S_I);
-                // get_binary(S_I);
-                cout<<"PRINTING VECTOR FOR the binary"<<endl;
-                printVector(S_I);
+    //             vector<T> S_I = get_verticesSet(subGraphs[S]); 
+    //             S_I = symDiff(S_I, vectorIT);
+    //             // printVector(S_I);
+    //             // get_binary(S_I);
+    //             cout<<"PRINTING VECTOR FOR the binary"<<endl;
+    //             printVector(S_I);
 
-                X[S] = min( X[S] , X[ get_binary(S_I)] +1 );
-                cout<<"index= " <<S <<" chromatic number assigned "<<X[S]<<endl;
-                cout<<endl;
+    //             X[S] = min( X[S] , X[ get_binary(S_I)] +1 );
+    //             cout<<"index= " <<S <<" chromatic number assigned "<<X[S]<<endl;
+    //             cout<<endl;
 
-                 // psuedocode
-                // X[S] = min(X[S], X[S \ I] + 1
+    //              // psuedocode
+    //             // X[S] = min(X[S], X[S \ I] + 1
 
-            // }
-        }
+    //         // }
+    //     }
 
-    }
-    cout<<endl;
-    subGraphs[arrSize-1].print();
-    // cout<<"The chromatic number of the graph is "<< X[arrSize]<<endl;
-    cout<<"The chromatic number of the graph is "<< X[arrSize-1]<<endl;
-    cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
-    cout<<"The chromatic number of the graph is "<< X[arrSize-3]<<endl;
-    cout<<arrSize<<endl;
+    // }
+    // cout<<endl;
+    // // subGraphs[arrSize-1].print();
+    // // // cout<<"The chromatic number of the graph is "<< X[arrSize]<<endl;
+    // // cout<<"The chromatic number of the graph is "<< X[arrSize-1]<<endl;
+    // // cout<<"The chromatic number of the graph is "<< X[arrSize-2]<<endl;
+    // // cout<<"The chromatic number of the graph is "<< X[arrSize-3]<<endl;
+    // cout<<arrSize<<endl;
 
 
 }
 
 
 
-
-
-
-// ______________________
-
-// alg 1
-// todo return a stack 
-
-// template <class T>
-// void  Graph<T>::smallMIS(Graph cur , vector <vector<T>>  & set_MIS ,  vector <T> S , vector<T> I , int k ){
-
-
-//     degreePair <T> degreeV = findDegree(cur); // finds first instance that satisfies the degree of the verticie
-
-//     if (S.size() == 0 or k== 0) {
-//         cout<<"Base case"<<endl;
-//         // return process i 
-//         set_MIS.push_back(I);
-
-
-
-
-//     }else if(degreeV.degree >=3  ){ //there exists v ∈ S with deg(v, S) ≥ 3
-//         cout<<" case 2: degree3 "<<endl;
-//         vector <T> vertexV= {degreeV.vertexValue} ; // {v} 
-//         smallMIS ( cur,set_MIS, symDiff(S,vertexV ) , I , k);
-//         smallMIS ( cur, set_MIS, symDiff(S, cur.vertices.find(degreeV.vertexValue)->second ) , setUnion(I , vertexV ) , k-1);
-        
-//         // psudeocode
-//         // smallMIS (S \ {v}, I, k);
-//         // smallMIS (S \ N(v), I ∪ {v}, k − 1); }
-
-//     }else if(degreeV.degree ==1 ){//there exists v ∈ S with deg(v, S) = 1
-//         cout<<" case 3:degree1 "<<endl;
-
-//         //TODO: make func that returns the first neighbor given a vertex
-//         T u = cur.vertices.begin()->second[0]; // finding the first neighbor of V 
-//         vector <T> vertexV= {degreeV.vertexValue} ;// {v} 
-//         vector <T> vertexU= {u} ;// {u} 
-
-
-//         // smallMIS ( cur, set_MIS,symDiff(S, cur.vertices.find(u)->second ), setUnion(I , vertexU ) , k-1);
-//         // smallMIS ( cur,set_MIS, symDiff(S, cur.vertices.find(degreeV.vertexValue)->second ) , setUnion(I , vertexV ) , k-1);
-       
-//         // psudeocode
-//         // let u be the neighbor of v;
-//         // smallMIS (S \ N(u), I ∪ {u}, k − 1);
-//         //  smallMIS (S \ N(v), I ∪ {v}, k − 1);
-        
-//     }else if( degreeV.degree ==0 ){//there exists v ∈ S with deg(v, S) = 0
-//         cout<<" case 4: degree 0 "<<endl;
-//         vector <T> vertexV= {degreeV.vertexValue} ; // {v} 
-//         smallMIS ( cur, set_MIS, symDiff(S,vertexV)  , setUnion(I , vertexV ) , k-1);
-        
-//         // psudeocode
-//         // smallMIS (S \ {v}, I ∪ {v}, k − 1);
-
-
-//     // TODO: talk about this case 
-//     }else{ //some cycle in S is not a triangle or k ≥ |S|/3
-//         cout<<" case 5: triangle"<<endl;
-//         // let u, v, and w be adjacent degree-two vertices, such that (if possible) u and w are nonadjacent; smallMIS (S \ N(u), I ∪ {u}, k − 1);
-//         // smallMIS (S \ N(v), I ∪ {v}, k − 1);
-//         // smallMIS (S \ ({u} ∪ N(w)), I ∪ {w}, k − 1);
-
-
-//     }
-
-// }
 
